@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class HandControl : MonoBehaviour
 {
     [SerializeField] GameObject btnDropHand, btnCallHand;
+    [SerializeField] GameObject handToDrop;
 
-    [SerializeField] NavMeshAgent handToDrop;
+   
     public float weight;
-    bool wtHand = true;
+    public bool wtHand = true;
     bool coming = false;
 
     Rigidbody2D rb;
 
-    GameObject dropedHand = null;
+    public GameObject dropedHand = null;
 
     private void Start()
     {
@@ -22,57 +24,51 @@ public class HandControl : MonoBehaviour
     }
     private void Update()
     {
-        handToDrop.updateRotation = false;
-        handToDrop.updateUpAxis = false;
+        if (dropedHand != null)
+        {
+            if (Vector2.Distance(transform.position, dropedHand.transform.position) < 1f && coming)
+            {
+                Destroy(dropedHand);
+                wtHand = true;
+                coming = false;
+                print("chegou");
+                rb.mass = rb.mass + weight;
+                dropedHand = null;
+            }
+        }
         if (wtHand)
         {
-         
-          
-
             btnCallHand.SetActive(false);
             btnDropHand.SetActive(true);
         }
         else
         {
-
-         
             btnDropHand.SetActive(false);
             btnCallHand.SetActive(true);
         }
-        if (coming)
+        if (dropedHand != null)
         {
-            dropedHand.GetComponent<NavMeshAgent>().SetDestination(transform.position);
+            if (coming)
+            {
+                dropedHand.GetComponent<HandMov>().called = true;
+            }
+            else
+            {
+                dropedHand.GetComponent<HandMov>().called = false;
+            }
         }
-        
+
     }
     public void DropHand()
     {
         rb.mass = rb.mass - weight;
-        dropedHand = Instantiate(handToDrop.gameObject, transform.position, transform.transform.rotation);
-            wtHand = false;
+        dropedHand = Instantiate(handToDrop.gameObject, transform.position, handToDrop.transform.rotation);
+        wtHand = false;
         coming = false;
     }
     public void CallHand()
     {
         coming = true;
         
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        print(collision.gameObject.name);
-
-        if(collision.gameObject == dropedHand)
-        {
-            if (coming == true)
-            {
-                Destroy(collision.gameObject);
-                wtHand = true;
-                coming = false;
-                print("chegou");
-                rb.mass = rb.mass + weight; 
-            }
-
-        }
     }
 }
