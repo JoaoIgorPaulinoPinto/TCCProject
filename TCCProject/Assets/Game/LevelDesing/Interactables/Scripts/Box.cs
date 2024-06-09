@@ -17,18 +17,28 @@ public class Box : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            if (collision.gameObject.GetComponent<HandControl>().wtHand == false)
+            
+            float angle = Vector2.Angle(collision.contacts[0].normal, Vector2.up);
+            if (angle > 90)
             {
-
-                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-
+                collision.gameObject.GetComponent<PlayerMoviment>().readyToMov = true;
             }
             else
             {
-                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-                collision.gameObject.GetComponent<PlayerMoviment>().readyToMov = false;
-                collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(Joystick.Horizontal * 1, collision.gameObject.GetComponent<Rigidbody2D>().velocity.y);
+                if (collision.gameObject.GetComponent<PackageControler>().wtPackage != false)
+                {
+
+                    GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+
+                }
+                else
+                {
+                    GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+                    collision.gameObject.GetComponent<PlayerMoviment>().readyToMov = false;
+                    collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(Joystick.Horizontal * 1, collision.gameObject.GetComponent<Rigidbody2D>().velocity.y);
+                }
             }
+            
         }   
     }
     private void OnCollisionExit2D(Collision2D collision)

@@ -14,7 +14,7 @@ public class PlayerMoviment : MonoBehaviour
     [SerializeField] LayerMask layerwalkable;
     [SerializeField] Transform groundCheck;
 
-    [Header("Controles")]
+    [Header("Controles")]   
     public FixedJoystick Joystick;
     public float movSpeed;
 

@@ -31,9 +31,9 @@ public class CameraControl : MonoBehaviour
     void Update()
     {
         
-        if (target.GetComponent<HandControl>().dropedHand != null)
+       if (target.GetComponent<PackageControler>().wtPackage == true)
         {
-            target2 = target.GetComponent<HandControl>().dropedHand.transform;
+            target2 = target.GetComponent<PackageControler>().dropedPackege.transform;
             float distance = Vector3.Distance(target.position, target2.position);
             if (distance >= distMin && distance <= distMax)
             {
@@ -49,7 +49,7 @@ public class CameraControl : MonoBehaviour
         {
             FreeCam();
         }
-
+        
            /*  if (target != null)
               {
 

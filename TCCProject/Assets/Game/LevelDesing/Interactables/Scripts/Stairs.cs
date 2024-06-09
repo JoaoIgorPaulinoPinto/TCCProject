@@ -6,7 +6,7 @@ public class Stairs : MonoBehaviour
 {
     public FixedJoystick Joystick;
     private void OnCollisionExit2D(Collision2D collision)
-    {
+    {   
         if (collision.transform.tag == "Player")
         {
             Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
@@ -18,7 +18,7 @@ public class Stairs : MonoBehaviour
 
         if (collision.transform.tag == "Player")
         {
-            if(collision.gameObject.GetComponent<HandControl>().wtHand == true)
+            if(collision.gameObject.GetComponent<PackageControler>().wtPackage != true)
             {
                 Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
 

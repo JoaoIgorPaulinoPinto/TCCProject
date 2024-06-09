@@ -11,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
+  - 
+  - 
+  - Walkable Obstacle
   - Walkable
-  - NavMeshWalkable
-  - Obstacle
-  - 'CharacterPlayable '
-  - 
-  - 
+  - Not Walkable Obstacle
+  - PlayableCharacter
   - 
   - 
   - 

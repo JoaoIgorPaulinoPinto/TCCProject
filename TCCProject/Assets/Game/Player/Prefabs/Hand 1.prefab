@@ -104,20 +104,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2615453851774760426}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5c8de65186930b43a04ca59146d5639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   speed: 5
-  numRays: 30
-  avoidanceDistance: 1.5
-  avoidanceForce: 2.5
+  numRays: 15
+  avoidanceDistance: 0.7
+  avoidanceForce: 2
   debugMode: 1
   obstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 1280
   called: 0
 --- !u!212 &1860793702623613874
 SpriteRenderer:
